@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Express-Commerce 1.0.0
+  description: |-
+    The e-commerce project is a platform that enables online businesses to showcase and sell their products online. 
+    [Notion Link](https://www.notion.so/softzino/Express-Commerce-7bf5a7416f49401b93d28b84898be4bc?pvs=4)
+
+  termsOfService: http://expresscommerce.com/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://expresscommerce.com
+servers:
+  - url: https://express-commers.com
+
+paths:
+  /featured:
+    get:
+      tags:
+        - featured
+      summary: Get featured product for carousel
+      operationId: bannerFetured
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              #$ref: "#/components/schemas/fetured"
+              schema:
+                required:
+                  - id
+                  - title
+                  - mega_image_url
+                  - thumb_url
+                  - price
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      format: int64
+                      example: 1002
+                    title:
+                      type: string
+                      example: "Fukien Tea Tree Bonsai (Fukien Tea Tree)"
+                    mega_image_url:
+                      type: url
+                      example: https://dtt1c9id3txwq.cloudfront.net/assets/images/001/434/632/square/DSC_0487.jpg
+                    thumb_url:
+                      type: url
+                      example: https://dtt1c9id3txwq.cloudfront.net/assets/images/001/434/632/square/DSC_0487.jpg
+                    price:
+                      type: int
+                      format: int64
+                      example: 1500
