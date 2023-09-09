@@ -45,6 +45,74 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/showcase"
+  /product/{slug}:
+    get:
+      tags:
+        - Store Front
+      summary: Get single product
+      operationId: showSingleProduct
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            example: twenty-years-old-china-palm-bonshai
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+  /tag/{tagName}:
+    get:
+      tags:
+        - Store Front
+      summary: Get product by tag name
+      operationId: showProductByTagName
+      parameters:
+        - name: tagName
+          in: path
+          required: true
+          schema:
+            type: string
+            example: bonshai
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                    - $ref: "#/components/schemas/product"
+                    - $ref: "#/components/schemas/product1"
+  /category/{categoryName}:
+    get:
+      tags:
+        - Store Front
+      summary: Get product by category name
+      operationId: showProductByCategoryName
+      parameters:
+        - name: categoryName
+          in: path
+          required: true
+          schema:
+            type: string
+            example: bonshai
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  anyOf:
+                    - $ref: "#/components/schemas/product"
+                    - $ref: "#/components/schemas/product1"
   /topsales:
     get:
       tags:
@@ -71,58 +139,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/recentlyViewed"
-
-  /submit-order:
-    post:
-      tags:
-        - Store Front
-      summary: Submit Order
-      operationId: submitOrder
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                products:
-                    type: array
-                    items:
-                      anyOf:
-                        - 
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              format: int64
-                              example: 123
-                            quantity:
-                              type: integer
-                              format: int64
-                              example: 12
-                        - 
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              format: int64
-                              example: 124
-                            quantity:
-                              type: integer
-                              format: int64
-                              example: 5
-                coupon: 
-                  type: string
-                  example: BIJOY-2024
-                
-                
-      responses:
-        "201":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/apiResponse"
-  
   /categories:
     get:
       tags:
@@ -156,6 +172,55 @@ paths:
                     thumb_url:
                       type: string
                       example: https://dtt1c9id3txwq.cloudfront.net/assets/images/001/434/632/square/DSC_0487.jpg
+
+  /submit-order:
+    post:
+      tags:
+        - Store Front
+      summary: Submit Order
+      operationId: submitOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: array
+                  items:
+                    anyOf:
+                      - type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            example: 123
+                          quantity:
+                            type: integer
+                            format: int64
+                            example: 12
+                      - type: object
+                        properties:
+                          id:
+                            type: integer
+                            format: int64
+                            example: 124
+                          quantity:
+                            type: integer
+                            format: int64
+                            example: 5
+                coupon:
+                  type: string
+                  example: BIJOY-2024
+
+      responses:
+        "201":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/apiResponse"
+
 components:
   schemas:
     product:
@@ -184,6 +249,32 @@ components:
           type: integer
           format: int64
           example: 1500
+    product1:
+      type: object
+      required:
+        - id
+        - title
+        - mega_image_url
+        - thumb_url
+        - price
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 2012
+        title:
+          type: string
+          example: "Fukien Coffee Tree Bonsai (Fukien Tea Tree)"
+        mega_image_url:
+          type: string
+          example: https://dtt1c9id3txwq.cloudfront.net/assets/images/001/434/632/square/DSC_0487.jpg
+        thumb_url:
+          type: string
+          example: https://dtt1c9id3txwq.cloudfront.net/assets/images/001/434/632/square/DSC_0487.jpg
+        price:
+          type: integer
+          format: int64
+          example: 2500
     featured:
       type: array
       items:
@@ -200,7 +291,8 @@ components:
     showcase:
       type: array
       items:
-        $ref: "#/components/schemas/product"
+        anyOf:
+          - $ref: "#/components/schemas/product"
     topsales:
       type: array
       items:
