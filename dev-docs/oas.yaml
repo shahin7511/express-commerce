@@ -113,7 +113,7 @@ paths:
                   anyOf:
                     - $ref: "#/components/schemas/product"
                     - $ref: "#/components/schemas/product1"
-  /topsales:
+  /top-sales:
     get:
       tags:
         - Store Front
