@@ -19,6 +19,148 @@ servers:
   - url: https://express-commers.com
 
 paths:
+  /login:
+    summary: To access the application as authenticated user, User needs to log in
+    post:
+      tags:
+        - Auth
+      summary: User loges in with ID and Password
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - "email"
+                - "password"
+              properties:
+                email:
+                  type: string
+                  example: hello@appl.com
+                password:
+                  type: string
+                  example: 1324UNa6
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - "email"
+                - "password"
+              properties:
+                email:
+                  type: string
+                  example: hello@appl.com
+                password:
+                  type: string
+                  example: 1324UNa6
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - token
+                  - refresh_token
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                  refresh_token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+  /refresh:
+    post:
+      summary: When auth token time exprires, user send a rquest to refresh the token
+      operationId: refreshToken
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refresh_token
+              properties:
+                refresh_token:
+                  type: string
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - token
+                  - refresh_token
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                  refresh_token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  /register:
+    summary: To access the application as authenticated user, User needs to register
+    post:
+      tags:
+        - Auth
+      summary: User registers with email ID and Password
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - "email"
+                - "password"
+              properties:
+                email:
+                  type: string
+                  example: hello@appl.com
+                password:
+                  type: string
+                  example: 1324UNa6
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - "email"
+                - "password"
+              properties:
+                email:
+                  type: string
+                  example: hello@appl.com
+                password:
+                  type: string
+                  example: 1324UNa6
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - token
+                  - refresh_token
+                properties:
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                  refresh_token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
   /featured:
     get:
       tags:
@@ -314,11 +456,106 @@ paths:
         - CMS
       responses:
         "200":
+          description: Successful operation
           content:
             application/json:
               schema:
                 type: object
                 $ref: "#/components/schemas/paginatedCategories"
+    post:
+      summary: Create category
+      operationId: cmsCreateCategory
+      tags:
+        - CMS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "#/components/schemas/category"
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              $ref: "#/components/schemas/category"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/category"
+  /cms/category/{id}:
+    summary: Get single category
+    get:
+      tags:
+        - CMS
+      operationId: cmsCategoryGetById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 33
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/category"
+    patch:
+      description: Patches category
+      operationId: cmsPatchCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 20
+      tags:
+        - CMS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "#/components/schemas/category"
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              $ref: "#/components/schemas/category"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/category"
+    delete:
+      tags:
+        - CMS
+      summary: Deletes category
+      operationId: cmsDeleteCategory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 201
+      responses:
+        "203":
+          description: Successful operation
 
   /cms/products:
     get:
@@ -366,7 +603,56 @@ paths:
           content:
             application/json:
               schema:
+                type: object
                 $ref: "#/components/schemas/product"
+    patch:
+      tags:
+        - CMS
+      summary: Patches product
+      operationId: cmsPatchProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 203
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/product"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/product"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/product"
+    delete:
+      tags:
+        - CMS
+      summary: Deletes product
+      operationId: cmsDeleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 30
+      responses:
+        "203":
+          description: Successful operation
+
 components:
   schemas:
     product:
