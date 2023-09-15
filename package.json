@@ -1,16 +1,32 @@
 {
   "name": "express-commerce",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "description": "This is a very basic e-commerce application for single vendor.",
+  "main": "./src/server.js",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./src/server.js",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "ecommerce"
+  ],
+  "author": {
+    "name": "Shahin Sheikh",
+    "email": "shahinsheikh.nrl@gmail.com",
+    "url": "https://www.linkedin.com/in/shahin7511"
+  },
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "pnpm": "^8.7.1"
+    "mongoose": "^7.5.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.15",
+    "cross-env": "^7.0.3",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^6.3.3"
   }
 }
