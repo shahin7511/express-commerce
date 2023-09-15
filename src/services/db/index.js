@@ -1,2 +1,3 @@
-import mongoose from "mongoose";
-const connection = await mongoose.connect(process.env.DATABASE_URL);
+import mongoose from "./mongoose.js";
+const db = mongoose;
+export default db;
