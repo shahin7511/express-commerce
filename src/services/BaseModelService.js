@@ -6,6 +6,10 @@ class BaseModelService {
   create(data) {
     return this.model.create(data);
   }
+
+  delete(id) {
+    return this.model.deleteOne({ _id: id });
+  }
 }
 
 export default BaseModelService;
