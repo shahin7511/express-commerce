@@ -9,4 +9,4 @@ afterAll(() => {
   db.disconnect();
 });
 
-export default {};
+export default db;
