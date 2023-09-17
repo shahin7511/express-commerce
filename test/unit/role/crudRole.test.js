@@ -1,8 +1,8 @@
 import {} from "../bootstrap.js";
 import RoleService from "../../../src/services/role/RoleService.js";
 
-afterEach(() => {
-  RoleService.deleteAll([]);
+afterEach(async () => {
+  await RoleService.deleteAll({});
 });
 
 describe("Role CRUD Test", () => {

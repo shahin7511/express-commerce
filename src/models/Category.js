@@ -22,10 +22,25 @@ const schema = {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  parents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: false,
+    },
+  ],
+  children: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: false,
+    },
+  ],
   products: [
     {
       type: mongoose.Types.ObjectId,
       ref: "Product",
+      required: false,
     },
   ],
 };

@@ -32,6 +32,8 @@ const schema = {
     required: true,
     validate: {
       validator: (v) => {
+        const re =
+          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         return v && re.test(v);
       },
     },
@@ -49,6 +51,7 @@ const schema = {
     {
       type: mongoose.Types.ObjectId,
       ref: "Role",
+      requreid: false,
     },
   ],
 };
