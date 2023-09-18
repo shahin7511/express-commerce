@@ -22,6 +22,14 @@ class BaseModelService {
   deleteAll(filters = {}) {
     return this.model.deleteMany(filters);
   }
+
+  createMany(data) {
+    return this.model.insertMany(data);
+  }
+
+  findOne(filter = {}) {
+    return this.model.findOne(filter);
+  }
 }
 
 export default BaseModelService;

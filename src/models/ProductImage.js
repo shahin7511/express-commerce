@@ -10,7 +10,7 @@ const schema = {
     type: String,
     required: true,
   },
-  orignal_name: {
+  original_name: {
     type: String,
     required: true,
   },

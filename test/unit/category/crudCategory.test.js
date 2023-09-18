@@ -19,12 +19,6 @@ describe("CRUD Category test", () => {
     email: "Shahin@gmail.com",
     password: "password",
   };
-  const productImageData = {
-    url: "https://cdn.britannica.com/65/123265-050-F0F8FD6B/bonsai-cypress-National-Bonsai-and-Penjing-Museum.jpg",
-    alt: "National-Bonsai-and-Penjing-Museum",
-    original_name: "bonsai-cypress-National-Bonsai-and-Penjing-Museum.jpg",
-    product: null,
-  };
 
   test("Create Category test", async () => {
     const user = await UserService.create(userData);
