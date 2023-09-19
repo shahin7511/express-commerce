@@ -20,4 +20,10 @@ describe("Token generation, validation, refresh test", () => {
     expect(newTokens).toHaveProperty("accessToken");
     expect(newTokens).toHaveProperty("refreshToken");
   });
+
+  test("invalid token test", () => {
+    expect(() => {
+      JwtService.verifyToken("tokens.refreshToken");
+    }).toThrow(/nternal server error/);
+  });
 });
