@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-class Hash {
+class HashService {
   constructor() {
     this.saltRounds = parseInt(process.env.BCRYPT_SALT_ROUND);
   }
@@ -24,4 +24,4 @@ class Hash {
   }
 }
 
-export default new Hash();
+export default new HashService();
