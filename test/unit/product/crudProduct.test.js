@@ -1,15 +1,15 @@
 import {} from "../bootstrap.js";
-import CategoryService from "../../../src/services/category/CategoryService.js";
-import UserService from "../../../src/services/user/UserService.js";
-import ProductService from "../../../src/services/product/ProductService.js";
-import ProductImageService from "../../../src/services/product/ProductImageService.js";
-import HashService from '../../../src/services/auth/HashService.js'
+import categoryService from "../../../src/services/category/CategoryService.js";
+import userService from "../../../src/services/user/UserService.js";
+import productService from "../../../src/services/product/ProductService.js";
+import productImageService from "../../../src/services/product/ProductImageService.js";
+import hashService from '../../../src/services/auth/HashService.js'
 
 afterEach(async () => {
-  await ProductImageService.deleteAll({});
-  await ProductService.deleteAll({});
-  await CategoryService.deleteAll({});
-  await UserService.deleteAll({});
+  await productImageService.deleteAll({});
+  await productService.deleteAll({});
+  await categoryService.deleteAll({});
+  await userService.deleteAll({});
 });
 
 describe("Product CRUD Test", () => {
@@ -17,7 +17,7 @@ describe("Product CRUD Test", () => {
     first_name: "Shahin",
     last_name: "Shahin",
     email: "Shahin@gmail.com",
-    password: HashService.make('password'),
+    password: hashService.make('password'),
   };
 
   const categoryData = {
@@ -34,10 +34,10 @@ describe("Product CRUD Test", () => {
   };
 
   test("Create Product test", async () => {
-    const user = await UserService.create(userData);
+    const user = await userService.create(userData);
     categoryData.user = user._id;
-    const category = await CategoryService.create(categoryData);
-    const productImage = await ProductImageService.create(productImageData);
+    const category = await categoryService.create(categoryData);
+    const productImage = await productImageService.create(productImageData);
     const data = {
       title: "title",
       slug: "slug",
@@ -49,8 +49,8 @@ describe("Product CRUD Test", () => {
       categories: [category._id],
     };
 
-    const product = await ProductService.create(data);
-    const updatedProductImage = await ProductImageService.update(
+    const product = await productService.create(data);
+    const updatedProductImage = await productImageService.update(
       productImage._id,
       {
         product: product._id,
@@ -62,10 +62,10 @@ describe("Product CRUD Test", () => {
   });
 
   test("Update Product test", async () => {
-    const user = await UserService.create(userData);
+    const user = await userService.create(userData);
     categoryData.user = user._id;
-    const category = await CategoryService.create(categoryData);
-    const productImage = await ProductImageService.create(productImageData);
+    const category = await categoryService.create(categoryData);
+    const productImage = await productImageService.create(productImageData);
     const data = {
       title: "title",
       slug: "slug",
@@ -77,8 +77,8 @@ describe("Product CRUD Test", () => {
       categories: [category._id],
     };
 
-    const product = await ProductService.create(data);
-    const updatedProductImage = await ProductImageService.update(
+    const product = await productService.create(data);
+    const updatedProductImage = await productImageService.update(
       productImage._id,
       {
         product: product._id,
@@ -87,9 +87,9 @@ describe("Product CRUD Test", () => {
 
     data["title"] = "Title updated";
 
-    const result = await ProductService.update(product._id, data);
+    const result = await productService.update(product._id, data);
 
-    const updatedProduct = await ProductService.find(product._id);
+    const updatedProduct = await productService.find(product._id);
 
     expect(updatedProduct).toHaveProperty("title", data.title);
     expect(result).toHaveProperty("modifiedCount", 1);
@@ -97,10 +97,10 @@ describe("Product CRUD Test", () => {
   });
 
   test("Delete Product test", async () => {
-    const user = await UserService.create(userData);
+    const user = await userService.create(userData);
     categoryData.user = user._id;
-    const category = await CategoryService.create(categoryData);
-    const productImage = await ProductImageService.create(productImageData);
+    const category = await categoryService.create(categoryData);
+    const productImage = await productImageService.create(productImageData);
     const data = {
       title: "title",
       slug: "slug",
@@ -112,12 +112,12 @@ describe("Product CRUD Test", () => {
       categories: [category._id],
     };
 
-    const product = await ProductService.create(data);
+    const product = await productService.create(data);
 
-    const deletedProduct = await ProductService.delete(product._id);
-    const deletedImage = await ProductImageService.delete(productImage._id);
-    const deletedCategory = await CategoryService.delete(category._id);
-    const deletedUser = await UserService.delete(user._id);
+    const deletedProduct = await productService.delete(product._id);
+    const deletedImage = await productImageService.delete(productImage._id);
+    const deletedCategory = await categoryService.delete(category._id);
+    const deletedUser = await userService.delete(user._id);
 
     expect(deletedProduct).toHaveProperty("deletedCount", 1);
     expect(deletedImage).toHaveProperty("deletedCount", 1);
@@ -126,10 +126,10 @@ describe("Product CRUD Test", () => {
   });
   
   test("Find Product test", async () => {
-    const user = await UserService.create(userData);
+    const user = await userService.create(userData);
     categoryData.user = user._id;
-    const category = await CategoryService.create(categoryData);
-    const productImage = await ProductImageService.create(productImageData);
+    const category = await categoryService.create(categoryData);
+    const productImage = await productImageService.create(productImageData);
     const data = {
       title: "title",
       slug: "slug",
@@ -141,9 +141,9 @@ describe("Product CRUD Test", () => {
       categories: [category._id],
     };
 
-    const product = await ProductService.create(data);
+    const product = await productService.create(data);
 
-    const result = await ProductService.find(product._id);
+    const result = await productService.find(product._id);
 
     expect(result).toHaveProperty('_id')
     

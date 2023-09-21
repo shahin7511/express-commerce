@@ -29,6 +29,4 @@ const seed = async () => {
   await AttributeService.createMany(data);
 };
 
-seed().then(() => {
-  db.connection.close();
-});
+export default seed;

@@ -1,4 +1,4 @@
-import JwtService from "../../../src/services/auth/JwtService.js";
+import jwtService from "../../../src/services/auth/JwtService.js";
 import {} from "../bootstrap.js";
 
 describe("Token generation, validation, refresh test", () => {
@@ -9,21 +9,21 @@ describe("Token generation, validation, refresh test", () => {
   };
 
   test("genrate token test", () => {
-    const tokens = JwtService.generateToken(payload);
+    const tokens = jwtService.generateToken(payload);
     expect(tokens).toHaveProperty("accessToken");
     expect(tokens).toHaveProperty("refreshToken");
   });
 
   test("refresh token test", () => {
-    const tokens = JwtService.generateToken(payload);
-    const newTokens = JwtService.refreshToken(tokens.refreshToken);
+    const tokens = jwtService.generateToken(payload);
+    const newTokens = jwtService.refreshToken(tokens.refreshToken);
     expect(newTokens).toHaveProperty("accessToken");
     expect(newTokens).toHaveProperty("refreshToken");
   });
 
   test("invalid token test", () => {
     expect(() => {
-      JwtService.verifyToken("tokens.refreshToken");
+      jwtService.verifyToken("tokens.refreshToken");
     }).toThrow(/nternal server error/);
   });
 });

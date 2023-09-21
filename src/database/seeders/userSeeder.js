@@ -1,6 +1,5 @@
 import {} from "dotenv/config";
 import UserService from "../../services/user/UserService.js";
-import db from "../../services/db/index.js";
 import HashService from "../../services/auth/HashService.js"
 
 const password = HashService.make('password');
@@ -17,6 +16,4 @@ const seed = async () => {
   await UserService.createMany(data);
 };
 
-seed().then(() => {
-  db.connection.close();
-});
+export default seed;

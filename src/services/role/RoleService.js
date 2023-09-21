@@ -1,5 +1,5 @@
 import Role from "../../models/Role.js";
-import BaseModelService from "../BaseModelService";
+import BaseModelService from "./../BaseModelService.js";
 
 class RoleService extends BaseModelService {
     addUserToRole(roleId, userId){
