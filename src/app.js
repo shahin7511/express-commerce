@@ -1,9 +1,8 @@
 import {} from "dotenv/config";
 import express from "express";
+import routes from "./modules/public/routes.js";
 const app = express();
 
-app.get("/", async (req, res) => {
-  res.statusCode = 200;
-  res.send("Helllo world");
-});
+app.use(routes);
+
 export default app;
