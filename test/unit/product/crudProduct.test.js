@@ -3,6 +3,7 @@ import CategoryService from "../../../src/services/category/CategoryService.js";
 import UserService from "../../../src/services/user/UserService.js";
 import ProductService from "../../../src/services/product/ProductService.js";
 import ProductImageService from "../../../src/services/product/ProductImageService.js";
+import HashService from '../../../src/services/auth/HashService.js'
 
 afterEach(async () => {
   await ProductImageService.deleteAll({});
@@ -16,7 +17,7 @@ describe("Product CRUD Test", () => {
     first_name: "Shahin",
     last_name: "Shahin",
     email: "Shahin@gmail.com",
-    password: "password",
+    password: HashService.make('password'),
   };
 
   const categoryData = {
