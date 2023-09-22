@@ -1,7 +1,7 @@
 import server from "../bootstrap.js";
 
 describe("test register user", () => {
-  test("GET /user can submit register", () => {
+  test("POST /user can submit register", () => {
     return server
       .post("/register")
       .send( {

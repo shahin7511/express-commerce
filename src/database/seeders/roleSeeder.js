@@ -7,6 +7,10 @@ const data = [
     name: "Admin",
     diable: false
   },
+  {
+    name: "Customer",
+    diable: false
+  },
 ];
 const seed = async () => {
 

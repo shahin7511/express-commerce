@@ -1,7 +1,8 @@
 import server from "../bootstrap.js";
 
 describe("test login", () => {
-  test("GET /login user", () => {
+  
+  test("POST /login user", () => {
     return server
       .post("/login")
       .send({
