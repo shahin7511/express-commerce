@@ -51,7 +51,8 @@ const schema = {
     {
       type: mongoose.Types.ObjectId,
       ref: "Role",
-      requreid: false,
+      requreid: true,
+      nullable: false
     },
   ],
 };
