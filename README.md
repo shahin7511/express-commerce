@@ -1,4 +1,5 @@
 # Small ECommerce Application
+## underDevelopment
 
 This is a very basic e-commerce application for single vendor.
 
@@ -12,4 +13,7 @@ This is a very basic e-commerce application for single vendor.
     - `pnpm test test/integration/register.test.js`
     - `pnpm test test/integration/auth/login.test.js`
 
-## underDevelopment
+# ERD is `resources/erd/ExpressCommerce.drawio` 
+# Open API Specification is `resources/open-api-specification.yaml` 
+
+## A lot to improve
